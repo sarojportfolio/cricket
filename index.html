@@ -3,23 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Chat Panel</title>
+  <title>User Chat</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="chat-container">
-    <h2>User Chat Panel</h2>
+    <h2>Chat with Us</h2>
 
-    <div id="nameInputContainer">
+    <!-- User name input area -->
+    <div id="nameArea">
       <input id="userName" type="text" placeholder="Enter your name" />
       <button id="setNameBtn">Set Name</button>
     </div>
 
-    <ul id="messages" style="display: none;"></ul>
-
-    <div class="chat-input" style="display: none;">
-      <input id="messageInput" type="text" placeholder="Type your message..." />
-      <button id="sendBtn">Send</button>
+    <!-- Chat messages -->
+    <div id="messages" style="display: none;">
+      <ul id="chatMessages"></ul>
+      <div class="chat-input">
+        <input id="messageInput" type="text" placeholder="Type a message" />
+        <button id="sendBtn">Send</button>
+      </div>
+      <button id="closeBtn" style="display: none;">Close Chat</button>
     </div>
   </div>
 
