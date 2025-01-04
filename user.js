@@ -1,52 +1,76 @@
-let userName = "";
-let userMessages = {}; // Object to store user messages
+let userName = localStorage.getItem('userName'); // Get the user's name from localStorage
+let userMessages = JSON.parse(localStorage.getItem('userMessages')) || {}; // Load user messages
 
-// Step 1: Set the user's name
-document.getElementById("setNameBtn").addEventListener("click", function () {
+// Show the saved messages or prompt for the name if it's not set
+if (userName) {
+  document.getElementById("nameArea").style.display = "none";
+  document.getElementById("messages").style.display = "block";
+  displayMessages(userName);
+} else {
+  document.getElementById("setNameBtn").addEventListener("click", setName);
+}
+
+// Function to set the name
+function setName() {
   const nameInput = document.getElementById("userName");
-  
   if (nameInput.value.trim() !== "") {
     userName = nameInput.value.trim();
-    userMessages[userName] = []; // Initialize user messages in the object
-
-    // Hide name input section and show the chat area
-    nameInput.style.display = "none";
-    document.getElementById("setNameBtn").style.display = "none";
+    localStorage.setItem('userName', userName); // Save the name
+    document.getElementById("nameArea").style.display = "none";
     document.getElementById("messages").style.display = "block";
-    document.querySelector(".chat-input").style.display = "flex";
-
-    const messages = document.getElementById("messages");
-    const welcomeMessage = document.createElement("li");
-    welcomeMessage.classList.add('welcome-message');
-    welcomeMessage.textContent = `Welcome, ${userName}! Start chatting now.`;
-    messages.appendChild(welcomeMessage);
+    displayMessages(userName);
   }
-});
+}
 
-// Step 2: Send messages to the chat
+// Function to display messages for the user
+function displayMessages(user) {
+  const messages = document.getElementById("chatMessages");
+  messages.innerHTML = ''; // Clear previous messages
+
+  // Display user's and admin's messages
+  if (userMessages[user]) {
+    userMessages[user].forEach(msg => {
+      const messageElement = document.createElement("li");
+      messageElement.textContent = `${msg.sender}: ${msg.message}`;
+      messageElement.classList.add(msg.sender === user ? 'user-message' : 'admin-message');
+      messages.appendChild(messageElement);
+    });
+  }
+
+  // Show the close button to end chat
+  document.getElementById("closeBtn").style.display = "inline-block";
+
+  // Scroll to the bottom of the chat
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// Send a new message
 document.getElementById("sendBtn").addEventListener("click", function () {
   const messageInput = document.getElementById("messageInput");
-  const messages = document.getElementById("messages");
-
   if (messageInput.value.trim() !== "") {
-    const userMessage = messageInput.value.trim();
+    const message = messageInput.value.trim();
 
-    // Store the message for the user
+    // Store the user's message
     if (!userMessages[userName]) {
       userMessages[userName] = [];
     }
-    userMessages[userName].push({ sender: userName, message: userMessage });
+    userMessages[userName].push({ sender: userName, message: message });
 
-    // Update the localStorage (simulating server-side communication)
+    // Update localStorage
     localStorage.setItem('userMessages', JSON.stringify(userMessages));
 
-    // Display the user's message in the chat
-    const userMessageElement = document.createElement("li");
-    userMessageElement.classList.add("user-message");
-    userMessageElement.textContent = `${userName}: ${userMessage}`;
-    messages.appendChild(userMessageElement);
+    // Display the new message
+    displayMessages(userName);
 
-    messageInput.value = ''; // Clear input field
-    messages.scrollTop = messages.scrollHeight;
+    // Clear input field
+    messageInput.value = '';
   }
+});
+
+// Close chat functionality
+document.getElementById("closeBtn").addEventListener("click", function () {
+  // Clear messages and reset for next chat
+  document.getElementById("chatMessages").innerHTML = '';
+  document.getElementById("closeBtn").style.display = "none";
+  localStorage.setItem('userMessages', JSON.stringify({})); // Clear messages from localStorage
 });
