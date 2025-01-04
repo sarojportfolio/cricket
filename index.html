@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Chat Panel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="chat-container">
+    <h2>User Chat Panel</h2>
+
+    <div id="nameInputContainer">
+      <input id="userName" type="text" placeholder="Enter your name" />
+      <button id="setNameBtn">Set Name</button>
+    </div>
+
+    <ul id="messages" style="display: none;"></ul>
+
+    <div class="chat-input" style="display: none;">
+      <input id="messageInput" type="text" placeholder="Type your message..." />
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+
+  <script src="user.js"></script>
+</body>
+</html>
