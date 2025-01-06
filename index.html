@@ -3,30 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Chat</title>
+  <title>Nepal Cricket Updates</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="chat-container">
-    <h2>Chat with Us</h2>
+  <header>
+    <h1>Nepal Cricket Updates</h1>
+    <nav>
+      <ul>
+        <li><a href="#live-scores">Live Scores</a></li>
+        <li><a href="#upcoming-matches">Upcoming Matches</a></li>
+        <li><a href="#news">News</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- User name input area -->
-    <div id="nameArea">
-      <input id="userName" type="text" placeholder="Enter your name" />
-      <button id="setNameBtn">Set Name</button>
-    </div>
-
-    <!-- Chat messages -->
-    <div id="messages" style="display: none;">
-      <ul id="chatMessages"></ul>
-      <div class="chat-input">
-        <input id="messageInput" type="text" placeholder="Type a message" />
-        <button id="sendBtn">Send</button>
+  <main>
+    <!-- Live Scores Section -->
+    <section id="live-scores">
+      <h2>Live Scores</h2>
+      <div id="live-score-container">
+        <p>Loading live scores...</p>
       </div>
-      <button id="closeBtn" style="display: none;">Close Chat</button>
-    </div>
-  </div>
+    </section>
 
-  <script src="user.js"></script>
+    <!-- Upcoming Matches Section -->
+    <section id="upcoming-matches">
+      <h2>Upcoming Matches</h2>
+      <div id="upcoming-matches-container">
+        <p>Loading upcoming matches...</p>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news">
+      <h2>Latest News</h2>
+      <div id="news-container">
+        <p>Loading news...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Nepal Cricket Updates</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
